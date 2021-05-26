@@ -1,0 +1,40 @@
+name: CI / CD
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: yarn install 
+      - name: Build app
+        run: yarn build 
+      - name: Linting
+        run: yarn test:lint
+      - name: Run the tests and generate coverage report
+        run: yarn test:unit --coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+      - name: Semantic release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release
+      - name: Deploy
+        run: |
+          git config --global user.name $user_name
+          git config --global user.email $user_email
+          git remote set-url origin https://${github_token}@github.com/${repository}
+          yarn deploy
+        env:
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          github_token: ${{ secrets.GH_TOKEN }}
+          repository: ${{ github.repository }}
