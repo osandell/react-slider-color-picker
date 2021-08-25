@@ -19,7 +19,7 @@ npm install --save react-slider-color-picker
 ## Usage
 
 ```tsx
-import React from 'react'
+import React, { useState } from 'react'
 
 import { HueSlider, SaturationSlider, LightnessSlider, AlphaSlider } from 'react-slider-color-picker'
 
