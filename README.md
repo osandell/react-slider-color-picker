@@ -1,15 +1,20 @@
 # react-slider-color-picker
 
-> A react color picker consisting of a set of sliders for adjusting R, G, B, hue, saturation, lightness and alpha.
+> A react color picker consisting of a set of sliders for adjusting hue, saturation, lightness and alpha.
 
 [![NPM](https://img.shields.io/npm/v/react-slider-color-picker.svg)](https://www.npmjs.com/package/react-slider-color-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 
+## Demo
+
+Here is a live demo of the app: https://olofsandell.com/react-slider-color-picker
 
 ## Install
 
-OBS! Under development. Not yet published as an npm package.
+```bash
+npm install --save react-slider-color-picker
+```
 
 ## Usage
 
@@ -60,4 +65,4 @@ const App = () => {
 
 ## License
 
-MIT © [osandell](https://github.com/osandell)
+MIT © [Olof Sandell](https://github.com/osandell)
