@@ -6,6 +6,7 @@ interface SliderProps {
   disabled?: true | false
   thumbBackground: string
   trackBackground: string
+  value: number
   handleChange: (string: string) => void
 }
 
@@ -106,6 +107,7 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
       onTouchEnd={handleTouchEnd}
       onTouchStart={handleTouchStart}
       css={inputStyle}
+      value={props.value}
       disabled={props.disabled}
     />
   )
