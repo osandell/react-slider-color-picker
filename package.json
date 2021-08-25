@@ -2,7 +2,7 @@
   "name": "react-slider-color-picker",
   "homepage": "https://olofsandell.com/react-slider-color-picker",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A react color picker consisting of a set of sliders for adjusting R, G, B, hue, saturation, lightness and alpha.",
   "author": "osandell",
   "license": "MIT",
