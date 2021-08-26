@@ -8,5 +8,5 @@ export interface Color {
 export interface ReactSliderColorPickerProps {
   disabled?: true | false
   color: Color
-  handleChange: (string: string) => void
+  handleChangeColor: (newColor: Color) => void
 }
