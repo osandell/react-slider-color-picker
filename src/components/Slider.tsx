@@ -7,7 +7,7 @@ interface SliderProps {
   thumbBackground: string
   trackBackground: string
   value: number
-  handleChange: (string: string) => void
+  handleMoveSlider: (value: number) => void
 }
 
 const trackHeight = 0.88
@@ -19,8 +19,8 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
   const [sliderThumbIsBeingTouched, setSliderThumbIsBeingTouched] =
     useState(false)
 
-  const handleChangeHue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.handleChange(event.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.handleMoveSlider(parseInt(event.target.value))
     sliderIsBeingTouched && setSliderThumbIsBeingTouched(true)
   }
 
@@ -103,7 +103,7 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
   return (
     <input
       type='range'
-      onChange={handleChangeHue}
+      onChange={handleChange}
       onTouchEnd={handleTouchEnd}
       onTouchStart={handleTouchStart}
       css={inputStyle}
