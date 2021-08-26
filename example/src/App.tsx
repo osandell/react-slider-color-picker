@@ -33,7 +33,6 @@ const App = () => {
     height: '100px',
     margin: '50px auto 0 auto',
     background: `linear-gradient(hsla(${color.h}, ${color.s}%, ${color.l}%, ${color.a}), hsla(${color.h}, ${color.s}%, ${color.l}%, ${color.a})), url(${myImagePath})`
-    // `linear-gradient(hsla(${props.color.h}, 100%, 50%, ${props.color.a}),  hsla(${props.color.h}, 100%, 50%, ${props.color.a})), url(${myImagePath})`
   })
 
   return (
