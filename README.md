@@ -31,34 +31,20 @@ interface Color {
 }
 
 const App = () => {
+
   const [color, setColor] = useState<Color>({h: 180, s: 100, l: 50, a: 1})
 
-  const handleChangeHue = (newHue: string) => {
-    setColor({...color, h: parseInt(newHue) * 3.6})
-  }
-
-  const handleChangeSaturation = (newSaturation: string) => {
-    setColor({...color, s: parseInt(newSaturation)})
-  }
-
-  const handleChangeLightness = (newLightness: string) => {
-    setColor({...color, l: parseInt(newLightness)})
-  }
-  
-  const handleChangeAlpha = (newAlpha: string) => {
-    setColor({...color, a: parseInt(newAlpha) / 100})
+  const handleChangeColor = (newColor: Color) => {
+    setColor(newColor)
   }
 
   return (
     <>
-      <HueSlider handleChange={handleChangeHue} color={color} />
-      <SaturationSlider handleChange={handleChangeSaturation} color={color} />
-      <LightnessSlider handleChange={handleChangeLightness} color={color} />
-      <AlphaSlider
-        handleChange={handleChangeAlpha}
-        color={color}
-      />
-    </>
+      <HueSlider handleChangeColor={handleChangeColor} color={color} />
+      <SaturationSlider handleChangeColor={handleChangeColor} color={color} />
+      <LightnessSlider handleChangeColor={handleChangeColor} color={color} />
+      <AlphaSlider handleChangeColor={handleChangeColor} color={color}/>
+    <>
   )
 }
 ```
