@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/osandell/react-slider-color-picker/compare/v1.1.0...v2.0.0) (2021-08-26)
+
+
+### Features
+
+* return a Color object instead of specific values for each slider ([e6118de](https://github.com/osandell/react-slider-color-picker/commit/e6118de8ad0c3a98d10e190761eab8bbf8e24fa9)), closes [#9](https://github.com/osandell/react-slider-color-picker/issues/9)
+
+
+### BREAKING CHANGES
+
+* Each slider will be returning a Color object, not a number.
+
 # [1.1.0](https://github.com/osandell/react-slider-color-picker/compare/v1.0.0...v1.1.0) (2021-08-25)
 
 
