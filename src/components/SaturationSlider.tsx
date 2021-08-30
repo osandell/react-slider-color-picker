@@ -6,15 +6,13 @@ import Slider from './Slider'
 // interfaces
 import { ReactSliderColorPickerProps } from '../interfaces'
 
-export const SaturationSlider: FC<ReactSliderColorPickerProps> = (
-  props
-): ReactElement => {
+export const SaturationSlider: FC<ReactSliderColorPickerProps> = (props): ReactElement => {
   const handleMoveSlider = (value: number) => {
     props.handleChangeColor({
       h: props.color.h,
       s: value,
       l: props.color.l,
-      a: props.color.a
+      a: props.color.a,
     })
   }
 

@@ -1,108 +1,59 @@
 {
   "name": "react-slider-color-picker",
-  "homepage": "https://olofsandell.com/react-slider-color-picker",
-  "private": true,
   "version": "2.0.0",
   "description": "A react color picker consisting of a set of sliders for adjusting R, G, B, hue, saturation, lightness and alpha.",
-  "author": "osandell",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "repository": "git@github.com:osandell/react-slider-color-picker.git",
+  "author": "Olof Sandell <contact@olofsandell.com>",
   "license": "MIT",
-  "repository": "osandell/react-slider-color-picker",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "prepare": "run-s build && husky install",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
-    "test:lint": "eslint \"**/*.ts\" \"**/*.tsx\"",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
-  },
-  "peerDependencies": {
-    "react": "^16.0.0"
-  },
+  "private": true,
   "devDependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@emotion/react": "^11.4.1",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^25.1.4",
-    "@types/node": "^12.12.38",
-    "@types/react": "^16.9.27",
-    "@types/react-dom": "^16.9.7",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
-    "babel-eslint": "^10.0.3",
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "babel-jest": "^27.1.0",
     "commitizen": "^4.2.4",
-    "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "gh-pages": "^2.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.1",
     "husky": "^7.0.0",
-    "lint-staged": "^11.1.2",
-    "microbundle-crl": "^0.13.10",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
-    "typescript": "^3.7.5"
+    "jest": "^27.1.0",
+    "lint-staged": ">=10",
+    "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "rollup": "^2.56.3",
+    "rollup-plugin-img": "^1.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.4.2"
   },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "@emotion/react": "^11.4.0"
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "coverageReporters": [
-      "lcov"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "body-max-line-length": [
-        0
-      ],
-      "footer-max-line-length": [
-        0
-      ]
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix",
-    "*.{css, scss, sass}": "stylelint --fix",
-    "*.json": "prettier --write"
+  "scripts": {
+    "build": "rollup -c",
+    "prepare": "husky install",
+    "test": "jest"
   },
   "plugins": [
     "@semantic-release/commit-analyzer",
@@ -129,5 +80,26 @@
     "branches": [
       "main"
     ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        0
+      ],
+      "footer-max-line-length": [
+        0
+      ]
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }

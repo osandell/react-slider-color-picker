@@ -2,20 +2,18 @@
 import { jsx } from '@emotion/react'
 import { ReactElement, FC } from 'react'
 import Slider from './Slider'
-import myImagePath from 'checker-pattern.png'
+import myImagePath from './checker-pattern.png'
 
 // interfaces
 import { ReactSliderColorPickerProps } from '../interfaces'
 
-export const AlphaSlider: FC<ReactSliderColorPickerProps> = (
-  props
-): ReactElement => {
+export const AlphaSlider: FC<ReactSliderColorPickerProps> = (props): ReactElement => {
   const handleMoveSlider = (value: number) => {
     props.handleChangeColor({
       h: props.color.h,
       s: props.color.s,
       l: props.color.l,
-      a: value / 100
+      a: value / 100,
     })
   }
 

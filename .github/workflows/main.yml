@@ -17,24 +17,12 @@ jobs:
         run: yarn install 
       - name: Build app
         run: yarn build 
-      - name: Linting
-        run: yarn test:lint
       - name: Run the tests and generate coverage report
-        run: yarn test:unit --coverage
+        run: yarn test -- --coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
       - name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release
-      - name: Deploy
-        run: |
-          git config --global user.name $user_name
-          git config --global user.email $user_email
-          git remote set-url origin https://${github_token}@github.com/${repository}
-          yarn deploy
-        env:
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.GH_TOKEN }}
-          repository: ${{ github.repository }}
+    
