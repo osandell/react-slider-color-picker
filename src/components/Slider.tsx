@@ -11,13 +11,13 @@ interface SliderProps {
 }
 
 const trackHeight = 0.88
-const thumbDiameterSmall: number = 1.4
+const thumbDiameterSmall = 1.4
 const thumbDiameterBig = 1.6
 
 const Slider: FC<SliderProps> = (props): ReactElement => {
+  // This variable is used to make the mobile version work correctly.
   const [sliderIsBeingTouched, setSliderIsBeingTouched] = useState(false)
-  const [sliderThumbIsBeingTouched, setSliderThumbIsBeingTouched] =
-    useState(false)
+  const [sliderThumbIsBeingTouched, setSliderThumbIsBeingTouched] = useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.handleMoveSlider(parseInt(event.target.value))
@@ -34,9 +34,7 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
   }
 
   let currentThumbDiameter
-  sliderThumbIsBeingTouched
-    ? (currentThumbDiameter = thumbDiameterBig)
-    : (currentThumbDiameter = thumbDiameterSmall)
+  sliderThumbIsBeingTouched ? (currentThumbDiameter = thumbDiameterBig) : (currentThumbDiameter = thumbDiameterSmall)
 
   const thumb: CSSObject = {
     boxSizing: 'border-box',
@@ -48,11 +46,9 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
     borderColor: '#faf6f6',
     borderWidth: '0.37em',
     boxShadow: `${
-      props.disabled
-        ? '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.25)'
-        : '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.75)'
+      props.disabled ? '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.25)' : '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.75)'
     }`,
-    background: `${props.disabled ? '#ddd' : props.thumbBackground}`
+    background: `${props.disabled ? '#ddd' : props.thumbBackground}`,
   }
 
   const track: CSSObject = {
@@ -60,7 +56,7 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
     border: 'none',
     height: `${trackHeight}em`,
     borderRadius: `${trackHeight / 2}em`,
-    background: `${props.disabled ? '#ddd' : props.trackBackground}`
+    background: `${props.disabled ? '#ddd' : props.trackBackground}`,
   }
 
   const inputStyle = css({
@@ -81,28 +77,26 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
       '&:active': {
         marginTop: `${0.5 * (trackHeight - thumbDiameterBig)}em`,
         width: `${thumbDiameterBig}em`,
-        height: `${thumbDiameterBig}em`
+        height: `${thumbDiameterBig}em`,
       },
       '@media (hover: hover)': {
         '&:hover': {
-          marginTop: `${
-            !props.disabled && 0.5 * (trackHeight - thumbDiameterBig)
-          }em`,
+          marginTop: `${!props.disabled && 0.5 * (trackHeight - thumbDiameterBig)}em`,
           width: `${!props.disabled && thumbDiameterBig}em`,
-          height: `${!props.disabled && thumbDiameterBig}em`
-        }
+          height: `${!props.disabled && thumbDiameterBig}em`,
+        },
       },
 
-      ...thumb
+      ...thumb,
     },
     '&::-moz-range-thumb': thumb,
     '&::-ms-thumb': { marginTop: 0, ...thumb },
-    '&::-ms-tooltip': { display: 'none' }
+    '&::-ms-tooltip': { display: 'none' },
   })
 
   return (
     <input
-      type='range'
+      type="range"
       onChange={handleChange}
       onTouchEnd={handleTouchEnd}
       onTouchStart={handleTouchStart}
@@ -114,7 +108,7 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
 }
 
 Slider.defaultProps = {
-  disabled: false
+  disabled: false,
 }
 
 export default Slider
