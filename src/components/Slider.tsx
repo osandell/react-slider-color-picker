@@ -1,9 +1,8 @@
-/** @jsx jsx */
-import { jsx, css, CSSObject } from '@emotion/react'
 import React, { ReactElement, FC, useState } from 'react'
+import styled, { css } from 'styled-components'
 
 interface SliderProps {
-  disabled?: true | false
+  disabled?: boolean
   thumbBackground: string
   trackBackground: string
   value: number
@@ -13,6 +12,76 @@ interface SliderProps {
 const trackHeight = 0.88
 const thumbDiameterSmall = 1.4
 const thumbDiameterBig = 1.6
+
+type ContainerType = {
+  currentThumbDiameter: number
+  disabled: boolean
+  thumbBackground: string
+  trackBackground: string
+}
+
+const Thumb = (disabled: boolean, currentThumbDiameter: number, thumbBackground: string) => css`
+
+    boxSizing: border-box;
+    border: none;
+    width: ${currentThumbDiameter}em;
+    height: ${currentThumbDiameter}em;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #faf6f6;
+    border-width: 0.37em;
+    box-shadow: ${disabled ? '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.25)' : '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.75)'};
+    background: ${disabled ? '#d0d' : thumbBackground};
+  }
+`
+const Track = (disabled: boolean, trackBackground: string) => css`
+  box-sizing: border-box;
+  border: none;
+  height: ${trackHeight}em;
+  border-radius: ${trackHeight / 2}em;
+  background: ${disabled ? '#ddd' : trackBackground};
+`
+const Input = styled.input`
+touch-action: none;
+-webkit-appearance: none;
+width: 100%;
+height: ${thumbDiameterBig + 0.65}em;
+margin: 0;
+padding: 0;
+font: 1em/1 arial, sans-serif;
+
+&::-webkit-slider-runnable-track {${(props: ContainerType) => Track(props.disabled, props.trackBackground)};}
+&::-moz-range-track {${(props: ContainerType) => Track(props.disabled, props.trackBackground)};}
+&::-ms-track {${(props: ContainerType) => Track(props.disabled, props.trackBackground)};}
+&::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: ${(props: ContainerType) => 0.5 * (trackHeight - props.currentThumbDiameter)}em;
+  &:active {
+    margin-top: ${0.5 * (trackHeight - thumbDiameterBig)}em;
+    width: ${thumbDiameterBig}em;
+    height: ${thumbDiameterBig}em;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      margin-top: ${(props: ContainerType) => !props.disabled && 0.5 * (trackHeight - thumbDiameterBig)}em;
+      width: ${(props: ContainerType) => !props.disabled && thumbDiameterBig}em;
+      height: ${(props: ContainerType) => !props.disabled && thumbDiameterBig}em;
+    }
+  }
+
+  ...${(props: ContainerType) => Thumb(props.disabled, props.currentThumbDiameter, props.thumbBackground)};
+
+}
+&::-moz-range-thumb { 
+  ${(props: ContainerType) => Thumb(props.disabled, props.currentThumbDiameter, props.thumbBackground)};
+}
+&::-ms-thumb { 
+  marginTop: 0; 
+  ...${(props: ContainerType) => Thumb(props.disabled, props.currentThumbDiameter, props.thumbBackground)};
+}
+&::-ms-tooltip { display: none };
+`
 
 const Slider: FC<SliderProps> = (props): ReactElement => {
   // This variable is used to make the mobile version work correctly.
@@ -36,73 +105,17 @@ const Slider: FC<SliderProps> = (props): ReactElement => {
   let currentThumbDiameter
   sliderThumbIsBeingTouched ? (currentThumbDiameter = thumbDiameterBig) : (currentThumbDiameter = thumbDiameterSmall)
 
-  const thumb: CSSObject = {
-    boxSizing: 'border-box',
-    border: 'none',
-    width: `${currentThumbDiameter}em`,
-    height: `${currentThumbDiameter}em`,
-    borderRadius: '50%',
-    borderStyle: 'solid',
-    borderColor: '#faf6f6',
-    borderWidth: '0.37em',
-    boxShadow: `${
-      props.disabled ? '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.25)' : '0.1em 0.1em 0.3em 0 rgba(0, 0, 0, 0.75)'
-    }`,
-    background: `${props.disabled ? '#ddd' : props.thumbBackground}`,
-  }
-
-  const track: CSSObject = {
-    boxSizing: 'border-box',
-    border: 'none',
-    height: `${trackHeight}em`,
-    borderRadius: `${trackHeight / 2}em`,
-    background: `${props.disabled ? '#ddd' : props.trackBackground}`,
-  }
-
-  const inputStyle = css({
-    touchAction: 'none',
-    WebkitAppearance: 'none',
-    width: '100%',
-    height: `${thumbDiameterBig + 0.65}em`,
-    margin: 0,
-    padding: 0,
-    font: '1em/1 arial, sans-serif',
-
-    '&::-webkit-slider-runnable-track': track,
-    '&::-moz-range-track': track,
-    '&::-ms-track': track,
-    '&::-webkit-slider-thumb': {
-      WebkitAppearance: 'none',
-      marginTop: `${0.5 * (trackHeight - currentThumbDiameter)}em`,
-      '&:active': {
-        marginTop: `${0.5 * (trackHeight - thumbDiameterBig)}em`,
-        width: `${thumbDiameterBig}em`,
-        height: `${thumbDiameterBig}em`,
-      },
-      '@media (hover: hover)': {
-        '&:hover': {
-          marginTop: `${!props.disabled && 0.5 * (trackHeight - thumbDiameterBig)}em`,
-          width: `${!props.disabled && thumbDiameterBig}em`,
-          height: `${!props.disabled && thumbDiameterBig}em`,
-        },
-      },
-
-      ...thumb,
-    },
-    '&::-moz-range-thumb': thumb,
-    '&::-ms-thumb': { marginTop: 0, ...thumb },
-    '&::-ms-tooltip': { display: 'none' },
-  })
-
   return (
-    <input
+    <Input
       type="range"
       onChange={handleChange}
       onTouchEnd={handleTouchEnd}
       onTouchStart={handleTouchStart}
-      css={inputStyle}
+      currentThumbDiameter={currentThumbDiameter}
+      thumbBackground={props.thumbBackground}
+      trackBackground={props.trackBackground}
+      disabled={props.disabled ? true : false}
       value={props.value}
-      disabled={props.disabled}
     />
   )
 }

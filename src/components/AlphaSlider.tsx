@@ -1,6 +1,4 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react'
-import { ReactElement, FC } from 'react'
+import React, { ReactElement, FC } from 'react'
 import Slider from './Slider'
 import myImagePath from './checker-pattern.png'
 

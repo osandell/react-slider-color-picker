@@ -1,6 +1,6 @@
 import { FC } from 'react';
 interface SliderProps {
-    disabled?: true | false;
+    disabled?: boolean;
     thumbBackground: string;
     trackBackground: string;
     value: number;
