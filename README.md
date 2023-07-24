@@ -8,7 +8,7 @@
 
 ## Demo
 
-Here is a live demo of the app: https://olofsandell.com/react-slider-color-picker
+Here is a demo application to showcase the color picker: https://osandell.github.io/dala-horse-designer/
 
 ## Install
 
